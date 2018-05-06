@@ -7,13 +7,13 @@ using namespace std;
 
 A::A(int a) :m_a(a)
 {
-	cout << "constructor A(int a)" << " this = " << this << endl;
+	cout << "constructor A(int a) for " << " this = " << this << endl;
 }
 
 
 A::~A()
 {
-	cout << "destructor ~A()" << " this = " << this << endl;
+	cout << "destructor ~A() for " << " this = " << this << endl;
 }
 
 void A::Show()
