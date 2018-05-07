@@ -6,7 +6,9 @@
 #include <memory>
 #include "A.h"
 #include "memguard.h"
+#include "memGuardTemplate.hpp"
 #include <crtdbg.h>
+#include "Treangle.h"
 
 using namespace std;
 
@@ -44,6 +46,23 @@ int main()
 		memG1->Show();
 		memG2->Show();
 		memG3->Show();
+		
+		// test template shared pointer class
+		Treangle * pTR1 = new Treangle(8, 12);
+		memGuardT  <Treangle> memGT1(pTR1);
+		memGuardT  <Treangle> memGT2(memGT1);
+		memGuardT  <Treangle> memGT3;
+	
+
+		memGT1->Show();
+		memGT2->Show();
+		memGT3->Show();  // in this line we call the show function for member-pointer(Treangle) memGuardT's class,
+		//whose value is zero! 
+		//so... for check this situation, we must check in Show function
+		//if (this == 0) then break function by return, else we show the shape
+		
+		memGT3 = memGT2;
+		memGT3->Show();
 	}
 	if (_CrtDumpMemoryLeaks())
 		cout << "mem LEAKS!" << endl;
